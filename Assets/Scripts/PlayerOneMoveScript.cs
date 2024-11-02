@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveScript : MonoBehaviour
+public class PlayerOneMoveScript : MonoBehaviour
 {
     public float moveSpeed = 5f;     // Speed for left and right movement
     public float jumpForce = 10f;    // Force applied when jumping
@@ -16,8 +16,16 @@ public class PlayerMoveScript : MonoBehaviour
 
     void Update()
     {
-        // Horizontal movement
-        float moveInput = Input.GetAxis("Horizontal");
+        // Horizontal movement with A and D keys only
+        float moveInput = 0f;
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveInput = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            moveInput = 1f;
+        }
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
         // Jumping
