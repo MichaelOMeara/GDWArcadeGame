@@ -30,7 +30,7 @@ public class ArrowSpawnScript : MonoBehaviour
 
     void SpawnArrow()
     {
-        SpawnRate = Random.Range(3.0f, 5.0f);
+        SpawnRate = Random.Range(2.0f, 4.0f);
 
         Instantiate(Arrow, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
     }
