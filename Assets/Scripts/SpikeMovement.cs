@@ -23,9 +23,11 @@ public class SpikeMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the collided object is the player
-        if (collision.gameObject.CompareTag("Player"))
+        // Check if the collided object has the tag "Player" or "playerTwo"
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerTwo"))
         {
+            FindObjectOfType<FinishLine>().OnPlayerDestroyed(collision.gameObject.tag);
+
             // Destroy the player GameObject on contact with spikes
             Destroy(collision.gameObject);
         }
