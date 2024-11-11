@@ -24,7 +24,7 @@ public class Pendulum : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the collided object has the tag "Player" or "playerTwo"
+        // Check if the collided object has the tag "Player" or "PlayerTwo"
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerTwo"))
         {
             FindObjectOfType<FinishLine>().OnPlayerDestroyed(collision.gameObject.tag);

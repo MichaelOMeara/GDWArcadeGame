@@ -6,7 +6,7 @@ public class DestroyOnCollision : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the collided object has the tag "Projectile", "Player", or "playerTwo"
+        // Check if the collided object has the tag "Projectile", "Player", or "PlayerTwo"
         if (collision.gameObject.CompareTag("Projectile") ||
             collision.gameObject.CompareTag("Player") ||
             collision.gameObject.CompareTag("PlayerTwo"))
