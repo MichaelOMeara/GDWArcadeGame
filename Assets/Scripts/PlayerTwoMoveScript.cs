@@ -28,8 +28,8 @@ public class PlayerTwoMoveScript : MonoBehaviour
         }
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
-        // Jumping with up arrow key
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
+        // Jumping with alphanumeric 4 key
+        if (Input.GetKeyDown(KeyCode.Alpha4) && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }

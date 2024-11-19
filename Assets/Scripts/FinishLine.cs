@@ -3,47 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class FinishLine : MonoBehaviour
 {
     public TextMeshProUGUI resultText;
-    public Button resetButton;
 
     private bool raceFinished = false;
+    private bool player1Finished = false;
+    private bool player2Finished = false;
     private bool player1Destroyed = false;
     private bool player2Destroyed = false;
 
     void Start()
     {
-        // Ensure the UI elements are inactive initially
+        // Ensure the UI element is inactive initially
         resultText.gameObject.SetActive(false);
-        resetButton.gameObject.SetActive(false);
+    }
 
-        // Add the listener for the reset button
-        resetButton.onClick.AddListener(ResetScene);
+    void Update()
+    {
+        // Reset the scene using the Enter key
+        if (raceFinished && Input.GetKeyDown(KeyCode.Return))
+        {
+            ResetScene();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if the race is finished to prevent multiple triggers
-        if (!raceFinished && (collision.CompareTag("Player") || collision.CompareTag("PlayerTwo")))
+        if (!raceFinished)
         {
-            raceFinished = true;
-
-            // Display which player won
+            // Check if Player 1 reaches the finish line
             if (collision.CompareTag("Player"))
             {
-                resultText.text = "Player 1 Wins!";
-            }
-            else if (collision.CompareTag("PlayerTwo"))
-            {
-                resultText.text = "Player 2 Wins!";
+                player1Finished = true;
             }
 
-            // Show the winner message and reset button
-            resultText.gameObject.SetActive(true);
-            resetButton.gameObject.SetActive(true);
+            // Check if Player 2 reaches the finish line
+            if (collision.CompareTag("PlayerTwo"))
+            {
+                player2Finished = true;
+            }
+
+            // Determine the result
+            if (player1Finished && player2Finished)
+            {
+                raceFinished = true;
+                resultText.text = "Both players win! Hit enter to restart.";
+            }
+            else if (player1Finished)
+            {
+                raceFinished = true;
+                resultText.text = "Player 1 Wins! Hit enter to restart.";
+            }
+            else if (player2Finished)
+            {
+                raceFinished = true;
+                resultText.text = "Player 2 Wins! Hit enter to restart.";
+            }
+
+            // Show the result message
+            if (raceFinished)
+            {
+                resultText.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -63,9 +86,8 @@ public class FinishLine : MonoBehaviour
         if (player1Destroyed && player2Destroyed && !raceFinished)
         {
             raceFinished = true;
-            resultText.text = "Both players lose!";
+            resultText.text = "Both players lose! Hit enter to restart.";
             resultText.gameObject.SetActive(true);
-            resetButton.gameObject.SetActive(true);
         }
     }
 

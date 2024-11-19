@@ -16,7 +16,6 @@ public class PlayerOneMoveScript : MonoBehaviour
 
     void Update()
     {
-        // Horizontal movement with A and D keys only
         float moveInput = 0f;
         if (Input.GetKey(KeyCode.A))
         {
@@ -29,7 +28,7 @@ public class PlayerOneMoveScript : MonoBehaviour
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
