@@ -26,7 +26,7 @@ public class PlayerTwoMoveScript : MonoBehaviour
         {
             moveInput = 1f;
         }
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         // Jumping with alphanumeric 4 key
         if (Input.GetKeyDown(KeyCode.Alpha4) && isGrounded)
